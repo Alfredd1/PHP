@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Test Documentation</title>
+        <style>
+            body {
+                text-rendering: optimizeLegibility;
+                font-variant-ligatures: common-ligatures;
+                font-kerning: normal;
+                margin-left: 2em;
+            }
+
+            body > ul > li {
+                font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial;
+                font-size: 2em;
+            }
+
+            h2 {
+                font-family: Tahoma, Helvetica, Arial;
+                font-size: 3em;
+            }
+
+            ul {
+                list-style: none;
+                margin-bottom: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 id="VotingAppTest1">Voting App Test1</h2>
+        <ul>
+            <li style="color: #ef2929;">❌ Register user</li>
+            <li style="color: #ef2929;">❌ Authenticate user</li>
+            <li style="color: #ef2929;">❌ Create topic</li>
+            <li style="color: #ef2929;">❌ Get topics</li>
+            <li style="color: #555753;">✓ Vote</li>
+            <li style="color: #ef2929;">❌ Has voted</li>
+            <li style="color: #555753;">✓ Session management</li>
+            <li style="color: #555753;">✓ Cookie management</li>
+        </ul>
+        <h2 id="VotingAppTest2">Voting App Test2</h2>
+        <ul>
+            <li style="color: #555753;">✓ Register user success</li>
+            <li style="color: #555753;">✓ Register user failure existing username</li>
+            <li style="color: #555753;">✓ Authenticate user success</li>
+            <li style="color: #555753;">✓ Authenticate user failure invalid credentials</li>
+            <li style="color: #555753;">✓ Create topic success</li>
+            <li style="color: #555753;">✓ Get topics success</li>
+            <li style="color: #ef2929;">❌ Vote success</li>
+            <li style="color: #ef2929;">❌ Vote failure invalid topic id</li>
+            <li style="color: #ef2929;">❌ Has voted success</li>
+            <li style="color: #ef2929;">❌ Has voted failure user has not voted</li>
+            <li style="color: #555753;">✓ Session management success</li>
+            <li style="color: #555753;">✓ Cookie management success</li>
+        </ul>
+    </body>
+</html>
