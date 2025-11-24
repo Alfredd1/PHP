@@ -1,3 +1,4 @@
+<?php include 'nav.php'; ?>
 <?php
 ///TODO Implement Vote Count
 /// TODO design UI
@@ -41,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body class="<?php echo $theme === 'dark' ? 'dark-mode' : ''; ?>">
 <header>
-    <nav>
+    <!--<nav>
         <a href="create_topic.php">Create Topic</a>
         <a href="profile.php">My Profile</a>
         <a href="vote.php">Vote Topic</a>
@@ -49,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" name="logout">Log out</button>
             <button type="button" id="themeToggle">Theme</button>
         </form>
-    </nav>
+    </nav>-->
 </header>
 <main>
     <h2>Topic List</h2>
@@ -89,4 +90,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 </html>
 
-<?php show_source(__FILE__) ?>
+<?php /*show_source(__FILE__) */?>
