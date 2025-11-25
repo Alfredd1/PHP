@@ -1,20 +1,21 @@
 <?php //TODO transfer the log in and everything into the index/dashboard
-session_start();
-include("functions.php");
-$userNotFound = false;
 
-$test = authenticateUser('new_user', 'password123') ? "true" : "false";
+    session_start();
+    include("functions.php");
+    $userNotFound = false;
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){ //TODO
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    if(authenticateUser($username, $password)){
-        setSession('username', $username);
-        header('Location: dashboard.php');
-    } else {
-        $userNotFound = true;
+    $test = authenticateUser('new_user', 'password123') ? "true" : "false";
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){ //TODO
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        if(authenticateUser($username, $password)){
+            setSession('username', $username);
+            header('Location: dashboard.php');
+        } else {
+            $userNotFound = true;
+        }
     }
-}
 
 ?>
 

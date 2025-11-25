@@ -1,27 +1,27 @@
-<?php include 'nav.php'; ?>
 <?php
-///TODO Implement Vote Count
-/// TODO design UI
-session_start();
-include "functions.php";
+    include 'nav.php';
+    ///TODO Implement Vote Count
+    /// TODO design UI
+    session_start();
+    include "functions.php";
 
-$topicList = getTopics();
-$voted = false;
-$theme = $_COOKIE['theme'] ?? 'light';
+    $topicList = getTopics();
+    $voted = false;
+    $theme = $_COOKIE['theme'] ?? 'light';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['logout'])) {
-        logOut();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['logout'])) {
+            logOut();
+        }
+        $topicID = $_POST['topicID'];
+        $voteType = $_POST['voteType'] ?? null;
+
+        if ($voteType && !hasVoted($_SESSION['username'], $topicID)) {
+            vote($_SESSION['username'], $topicID, $voteType);
+        } else if ($voteType) {
+            $voted = true;
+        }
     }
-    $topicID = $_POST['topicID'];
-    $voteType = $_POST['voteType'] ?? null;
-
-    if ($voteType && !hasVoted($_SESSION['username'], $topicID)) {
-        vote($_SESSION['username'], $topicID, $voteType);
-    } else if ($voteType) {
-        $voted = true;
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -33,17 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <header>
-        <!--<nav>
-            <a href="create_topic.php">Create Topic</a>
-            <a href="profile.php">My Profile</a>
-            <a href="vote.php">Vote Topic</a>
-            <form method="POST">
-                <button type="submit" name="logout">Log out</button>
-                <button type="button" id="themeToggle">Theme</button>
-            </form>
-        </nav>-->
-    </header>
+
     <main>
         <h2>Topic List</h2>
         <?php foreach ($topicList as $topic): ?>

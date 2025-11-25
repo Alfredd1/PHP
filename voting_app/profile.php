@@ -1,26 +1,25 @@
 <?php
-include 'nav.php';
+    include 'nav.php';
 
-session_start();
-include "functions.php";
-if (isset($_POST['theme'])) {
-    setTheme();
-    exit;
-}
-$theme = $_COOKIE['theme'] ?? 'light';
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['logout'])) {
-        logOut();
+    session_start();
+    include "functions.php";
+    if (isset($_POST['theme'])) {
+        setTheme();
+        exit;
     }
-}
+    $theme = $_COOKIE['theme'] ?? 'light';
 
-$votes = getUserVotingHistory($_SESSION['username']);
-$topics = getTopics();
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['logout'])) {
+            logOut();
+        }
+    }
 
-$totalTopicsCreated = getTotalTopicsCreated($_SESSION['username']);
-$totalVotesCast = getTotalVotesCast($_SESSION['username']);
+    $votes = getUserVotingHistory($_SESSION['username']);
+    $topics = getTopics();
 
+    $totalTopicsCreated = getTotalTopicsCreated($_SESSION['username']);
+    $totalVotesCast = getTotalVotesCast($_SESSION['username']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
