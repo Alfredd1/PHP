@@ -1,21 +1,21 @@
 <?php //TODO transfer the log in and everything into the index/dashboard
-session_start();
-include("functions.php");
-$userNotFound = false;
+    include 'nav.php';
+    session_start();
+    include("functions.php");
+    $userNotFound = false;
 
-$test = authenticateUser('new_user', 'password123') ? "true" : "false";
+    $test = authenticateUser('new_user', 'password123') ? "true" : "false";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){ //TODO
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    if(authenticateUser($username, $password)){
-        setSession('username', $username);
-        header('Location: dashboard.php');
-    } else {
-        $userNotFound = true;
+    if($_SERVER["REQUEST_METHOD"] == "POST"){ //TODO
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        if(authenticateUser($username, $password)){
+            setSession('username', $username);
+            header('Location: dashboard.php');
+        } else {
+            $userNotFound = true;
+        }
     }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -50,27 +50,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //TODO
         <p>Don't have an account? <a href="register.php">Register Here</a></p>
         <p>test: <?=$test?></p>
     </div>
-<script>
-    function formChecker(){
-        let username = document.forms["login"]["username"].value.trim();
-        let password = document.forms["login"]["password"].value;
 
-        if(username === "" || password === ""){
-            alert("Please fill out the log in fields");
-            return false;
+    <script>
+        function formChecker(){
+            let username = document.forms["login"]["username"].value.trim();
+            let password = document.forms["login"]["password"].value;
+
+            if(username === "" || password === ""){
+                alert("Please fill out the log in fields");
+                return false;
+            }
+            if (password.length < 5){
+                alert("Password must be greater than 5");
+                return false;
+            }
+            return true;
+
+
         }
-        if (password.length < 5){
-            alert("Password must be greater than 5");
-            return false;
-        }
-        return true;
-
-
-    }
-    <?php if ($userNotFound): ?>
-    alert("Incorrect username or password");
-    <?php endif ?>
-</script>
+        <?php if ($userNotFound): ?>
+        alert("Incorrect username or password");
+        <?php endif ?>
+    </script>
 </body>
 </html>
 <?php /*show_source(__FILE__) */?>

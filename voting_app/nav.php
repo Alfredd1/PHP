@@ -84,7 +84,7 @@
     }
     :root {
         --bg: #000000;
-        --text: #ffffff;`
+        --text: #ffffff;
     }
 
     /* Light Theme */
