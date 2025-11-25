@@ -1,4 +1,6 @@
 <?php
+include 'nav.php';
+
 session_start();
 include "functions.php";
 if (isset($_POST['theme'])) {
@@ -38,7 +40,7 @@ $totalVotesCast = getTotalVotesCast($_SESSION['username']);
 </head>
 <body class="<?php echo $theme === 'dark' ? 'dark-mode' : ''; ?>">
 <header>
-    <nav>
+    <!--<nav>
         <a href="create_topic.php">Create Topic</a>
         <a href="profile.php">My Profile</a>
         <a href="vote.php">Vote Topic</a>
@@ -46,7 +48,7 @@ $totalVotesCast = getTotalVotesCast($_SESSION['username']);
             <button type="submit" name="logout">Log out</button>
             <button type="button" id="themeToggle">Theme</button>
         </form>
-    </nav>
+    </nav>-->
 </header>
 <main>
     <h2>Voting History: </h2>
@@ -79,4 +81,4 @@ $totalVotesCast = getTotalVotesCast($_SESSION['username']);
 </script>
 </body>
 </html>
-<?php show_source(__FILE__) ?>
+<?php /*show_source(__FILE__) */?>

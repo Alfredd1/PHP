@@ -1,4 +1,6 @@
+
 <?php
+include 'nav.php';
 include "functions.php";
 session_start();
 if (isset($_POST['theme'])) {
@@ -32,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body class="<?php echo $theme === 'dark' ? 'dark-mode' : ''; ?>">
 <header>
-    <nav>
+    <!--<nav>
         <a href="create_topic.php">Create Topic</a>
         <a href="profile.php">My Profile</a>
         <a href="vote.php">Vote Topic</a>
@@ -40,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" name="logout">Log out</button>
             <button type="button" id="themeToggle">Theme</button>
         </form>
-    </nav>
+    </nav>-->
 </header>
 <main>
     <p>This is the dashboard</p>
@@ -63,4 +65,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 </script>
 </body>
 </html>
-<?php show_source(__FILE__) ?>
+<?php /*show_source(__FILE__) */?>
