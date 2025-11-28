@@ -32,7 +32,7 @@
 
 <body>
     <main>
-        <div id="warning" ">
+        <div id="warning" >
             You Already Voted for on this topic.
         </div>
         <h2 id="pageTitle">Topic List</h2>
