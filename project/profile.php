@@ -28,6 +28,7 @@
 <head>
     <title>Dashboard</title>
 </head>
+<body>
     <h1 style="text-align:center; font-size: 100px;">Profile</h1>
 
     <div id="bigWrapper">
@@ -55,10 +56,10 @@
                     <?php foreach($topics as $topic): ?>
 
                     <?php if ($topic['topicID'] === $vote[0]): ?>
-                        <div class="topic-vote" style=" background-color: <?= $vote[2] === 'upvote' ? '#e3495e' : '#4dab64' ?>" >
+                        <div class="topic-vote" style=" background-color: <?= $vote[2] === 'up' ? '#4dab64' : '#e3495e' ?>" >
                             <p class="vote-content"><?=  $topic['title'] ?></p>
 
-                            <p class="vote-content"> vote <?=  $vote[2]?></p>
+                            <p class="vote-content"> voted <?=  $vote[2]?></p>
                         </div>
                     <?php endif ?>
 
