@@ -1,5 +1,4 @@
 <?php
-    include 'nav.php';
     $registered = false;
     include("functions.php");
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
