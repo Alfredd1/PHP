@@ -72,7 +72,7 @@
 <style>
     #pageTitle{
         text-align: center;
-        font-size: 70px;
+        font-size: 100px;
     }
     .eventBox{
         background-color: #E6E6FA;
@@ -83,6 +83,8 @@
 
         padding: 10px;
         margin-bottom: 15px;
+
+        color: black;
     }
     p{
         margin-bottom: 5px;
