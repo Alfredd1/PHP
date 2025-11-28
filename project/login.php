@@ -26,6 +26,7 @@
     <style>
         #title{
             color: black;
+            font-size: 60px;
         }
         div {
             width: 500px;
