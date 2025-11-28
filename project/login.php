@@ -1,5 +1,5 @@
 <?php
-    include 'nav.php';
+
     session_start();
     include("functions.php");
     $userNotFound = false;
@@ -11,7 +11,7 @@
         $password = $_POST["password"];
         if(authenticateUser($username, $password)){
             setSession('username', $username);
-            header('Location: dashboard.php');
+            header('Location: profile.php');
         } else {
             $userNotFound = true;
         }
@@ -102,7 +102,7 @@
 
     }
     <?php if ($userNotFound): ?>
-    alert("Incorrect username or password");
+        alert("Incorrect username or password");
     <?php endif ?>
 </script>
 </body>
