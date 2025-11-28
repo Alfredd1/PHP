@@ -22,33 +22,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <style>
+
+        #title{
+            color: black;
+            font-size: 60px;
+        }
         div {
             width: 500px;
             height: 500px;
             margin: 4em auto;
-            background-color: #f0f0f0;
+            background-color: #E6E6FA;
             border: 1px solid #ccc;
             border-radius: 10px;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 1em;
+            display: flex;              /* enables flexbox */
+            flex-direction: column;     /* stack items vertically */
+            justify-content: center;    /* center vertically */
+            align-items: center;        /* center horizontally */
+            text-align: center;         /* center text too */
         }
+        .form {
+            margin-top: 20px;
+            color: black;
+        }
+        p{
+            color: black;
+        }
+        #username, #password{
+            margin-bottom: 20px;
+            font-size: 25px;
+            border-radius: 10px;
+        }
+        label{
+            font-size: 30px;
+        }
+        #registerBtn{
+            border-radius: 12px;
+
+            padding: 20px 40px 20px 40px;
+        }
+        #registerBtn:hover{
+            background-color:#cfcffc;
+        }
+
     </style>
 </head>
 
 <body>
     <div>
-        <form name="registration" action="register.php" method="POST" onsubmit="return formChecker()">
+    <h1 id="title">Register</h1>
+        <form class="form" name="registration" action="register.php" method="POST" onsubmit="return formChecker()">
             <label for="username">Username:&nbsp;</label>
+            <br>
             <input type="text" id="username" name="username"">
             <br>
             <label for="password">Password:&nbsp;</label>
+            <br>
             <input type="password" id="password" name="password"">
             <br>
-            <button type="submit">Register</button>
+            <button id="registerBtn" type="submit">Register</button>
         </form>
     </div>
 
