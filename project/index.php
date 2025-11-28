@@ -1,7 +1,9 @@
 
 <?php
     include "functions.php";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
     header("Location: login.php"); // instantly redirects to login ( this is for the server )
     exit;

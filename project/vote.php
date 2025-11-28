@@ -1,8 +1,8 @@
 <?php
     include 'nav.php';
-    ///TODO Implement Vote Count
-    /// TODO design UI
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     include "functions.php";
 
     $topicList = getTopics();
