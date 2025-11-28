@@ -28,27 +28,115 @@
 <head>
     <title>Dashboard</title>
 </head>
+    <h1 style="text-align:center; font-size: 100px;">Profile</h1>
 
-<body>
+    <div id="bigWrapper">
+        <div id="userInfo">
+            <div>
+                <img id="pfp-img" src="imgs/default-pfp.svg" alt="pfp">
+                <h3 style="text-align: center;"><?=  $_SESSION['username'] ?? "Guest" ?></h3>
+            </div>
 
-    <main>
-        <h2>Voting History: </h2>
-        <?php foreach($votes as $vote): ?>
-            <?php foreach($topics as $topic): ?>
-                <?php if ($topic['topicID'] === $vote[0]): ?>
-                    <p>Title: <?= $topic['title'] ?></p>
-                    <p>Vote: <?= $vote[2]?></p>
-                <?php endif ?>
-            <?php endforeach ?>
-        <?php endforeach ?>
-        <p>Total Votes: <?= $totalVotesCast ?></p>
-        <p>Total Topics Created: <?= $totalTopicsCreated ?></p>
-    </main>
-    <footer>
+            <hr>
 
-    </footer>
+            <div>
+                <p>ID: </p>
+                <p >Total Votes: <?=  $totalVotesCast ?> </p>
+                <p >Total Topics Created: <?=  $totalTopicsCreated ?> </p>
+            </div>
+
+        </div>
+
+        <div id="vote-history-Wrapper">
+            <h2 style="text-align: center; font-size: 40px; margin-top: 15px;">Voting History</h2>
+
+            <div class="vote-blocks">
+                <?php foreach($votes as $vote): ?>
+                    <?php foreach($topics as $topic): ?>
+
+                    <?php if ($topic['topicID'] === $vote[0]): ?>
+                        <div class="topic-vote" style=" background-color: <?= $vote[2] === 'upvote' ? '#e3495e' : '#4dab64' ?>" >
+                            <p class="vote-content"><?=  $topic['title'] ?></p>
+
+                            <p class="vote-content"> vote <?=  $vote[2]?></p>
+                        </div>
+                    <?php endif ?>
+
+                    <?php endforeach ?>
+                <?php endforeach ?>
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
+
 </html>
+
+<style>
+    #bigWrapper{
+        margin: 100px;
+
+        display: flex;
+        gap: 40px; /* space between the two boxes */
+        align-items: flex-start; /* keeps them aligned at the top */
+
+        color: black;
+    }
+
+    #userInfo{
+        border: #111111 solid 2px;
+        border-radius:10px;
+
+        padding: 20px;
+
+        width: 350px;
+        height: 350px;
+
+        background-color:  #E6E6FA;
+    }
+    #pfp-img{
+        height: 200px;
+        width: 200px;
+
+
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #vote-history-Wrapper{
+        background-color: #FAF6E6;
+        border: solid 2px black;
+        border-radius:10px;
+        width: 1000px;
+        height: 350px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    .vote-blocks {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .topic-vote{
+        border: 1px solid black;
+        margin-bottom: 8px;
+        border-radius: 6px;
+
+        width: 88px;
+        height:fit-content;
+    }
+    .vote-content{
+        margin: 2px;
+        text-align: center;
+    }
+
+
+</style>
 
 <?php /*show_source(__FILE__) */?>
