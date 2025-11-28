@@ -1,5 +1,9 @@
 <?php
-$currentPage = basename($_SERVER['PHP_SELF']); // Get current page filename
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    $currentPage = basename($_SERVER['PHP_SELF']); // Get current page filename
+
 ?>
 
     <nav id="nav-1">
@@ -7,9 +11,7 @@ $currentPage = basename($_SERVER['PHP_SELF']); // Get current page filename
             <li>
                 <a class="nav-a <?php if($currentPage == 'create_topic.php') echo 'active'; ?>" href="create_topic.php">Create topic</a>
             </li>
-            <li>
-                <a class="nav-a <?php if($currentPage == 'dashboard.php') echo 'active'; ?>" href="dashboard.php">Login/Logout</a>
-            </li>
+
             <li>
                 <a class="nav-a <?php if($currentPage == 'profile.php') echo 'active'; ?>" href="profile.php">Profile</a>
             </li>
@@ -19,11 +21,19 @@ $currentPage = basename($_SERVER['PHP_SELF']); // Get current page filename
             <li>
                 <a class="nav-a" href="#" id="theme-toggle">Change theme color</a>
             </li>
+
+            <li id="logged-in-as">
+                Hi: <span><?= $_SESSION['username'] ?? "Guest" ?></span>
+            </li>
+
+            <li id="nav-logout">
+                <a class="nav-a" href="logout.php">logout</a>
+            </li>
         </ul>
     </nav>
 
 
-    <script>
+<script>
     const toggle = document.getElementById("theme-toggle");
 
     // On page load, check stored theme
@@ -62,16 +72,45 @@ $currentPage = basename($_SERVER['PHP_SELF']); // Get current page filename
         display: flex;
         margin: 0;
         padding: 0 1rem;
-        gap: 1rem;
+        flex-wrap: nowrap;
+        align-items: center;
     }
 
     .nav-a {
-
         display: block;
         padding: 14px 16px;
         color: white;
         text-decoration: none;
     }
+    nav a:hover {
+        background-color: #111;
+    }
+
+    #logged-in-as{
+        margin-left: 250px;
+        font-size: 25px;
+        color: white;
+        display: flex;          /* keeps content on one line */
+        align-items: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    #logged-in-as span{
+        margin-left: 5px;
+    }
+    #nav-logout{
+
+        margin-left: 750px;
+        margin-right: 10px;
+        border-radius: 12px;
+
+        display: block;
+        padding: 5px 5px;
+        color: white;
+        text-decoration: none;
+        background-color: red;
+    }
+
 
     body {
         margin: 0;
@@ -117,7 +156,7 @@ $currentPage = basename($_SERVER['PHP_SELF']); // Get current page filename
 </style>
 
 <?php
-    $currentPage = basename($_SERVER['PHP_SELF']); // e.g., "dashboard.php"
+    $currentPage = basename($_SERVER['PHP_SELF']); // e.g., "index.php"
 ?>
 
 
