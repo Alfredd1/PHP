@@ -72,11 +72,11 @@
     <div>
     <h1 id="title">Register</h1>
         <form class="form" name="registration" action="register.php" method="POST" onsubmit="return formChecker()">
-            <label for="username">Username:&nbsp;</label>
+            <label for="username">Username</label>
             <br>
             <input type="text" id="username" name="username"">
             <br>
-            <label for="password">Password:&nbsp;</label>
+            <label for="password">Password</label>
             <br>
             <input type="password" id="password" name="password"">
             <br>
