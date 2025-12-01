@@ -1,3 +1,0 @@
-29|John12|Mathematics|Algebra and Calculus
-30|John12|Biology|Organ Systems
-31|John12|Software Quality Assurance|Different Test Cases

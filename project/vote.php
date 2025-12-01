@@ -81,6 +81,8 @@
                         Downvote
                     </button>
 
+
+                    <input id="commentBox" type="text" placeholder="Thoughts, Opinions, Comments?">
                 </form>
             </div>
 
@@ -165,6 +167,12 @@
         justify-content: center; /* Center the whole grid */
     }
 
+    #commentBox{
+        margin-top: 5px;
+        width: 307px;
+        border-radius: 10px;
+        height: 40px;
+    }
     #warning{
         display: none;
         background-color: red;
@@ -173,6 +181,10 @@
         height: 50px;
         text-align: center;
 
+    }
+
+    form{
+        margin-bottom: 0px;
     }
 </style>
 
