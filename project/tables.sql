@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 25, 2025 at 03:42 PM
+-- Generation Time: Nov 30, 2025 at 12:58 AM
 -- Server version: 10.6.23-MariaDB-cll-lve
 -- PHP Version: 8.3.27
 
@@ -58,8 +58,8 @@ CREATE TABLE `Topics` (
 CREATE TABLE `Users` (
   `id` int(11) NOT NULL,
   `username` int(50) NOT NULL,
-  `email` int(50) NOT NULL,
-  `password` int(50) NOT NULL
+  `email` varchar(50) NOT NULL,
+  `password` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -131,7 +131,7 @@ ALTER TABLE `Topics`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `Votes`
