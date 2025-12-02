@@ -1,17 +1,22 @@
 <?php
-
+    include("functions.php");
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    include("functions.php");
     $userNotFound = false;
+    require_once "classes.php";
+    $pdo = new PDO(
+        "mysql:host=localhost;dbname=s5571963_tables;charset=utf8",
+        "s5571963_AlfredNavarro", "1234alfred", [PDO::ATTR_ERRMODE => PDO:: ERRMODE_EXCEPTION]
+        );
+    $userReference = new User($pdo);
 
-    $test = authenticateUser('new_user', 'password123') ? "true" : "false";
+    $test = $userReference->authenticateUser('new_user', 'password123') ? "true" : "false";
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username = $_POST["username"];
         $password = $_POST["password"];
-        if(authenticateUser($username, $password)){
+        if($userReference->authenticateUser($username, $password)){
             setSession('username', $username);
             header('Location: profile.php');
         } else {

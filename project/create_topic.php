@@ -1,6 +1,13 @@
 <?php
     include 'nav.php';
     include "functions.php";
+    require_once "classes.php";
+    $pdo = new PDO(
+        "mysql:host=localhost;dbname=s5571963_tables;charset=utf8",
+        "s5571963_AlfredNavarro", "1234alfred", [PDO::ATTR_ERRMODE => PDO:: ERRMODE_EXCEPTION]
+        );
+    $userReference = new User($pdo);
+    $topicReference = new Topic($pdo);
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -15,7 +22,7 @@
             logOut();
         }
         if(isset($_POST["title"]) && isset($_POST["description"])){
-            if(createTopic($_SESSION['username'], $_POST["title"], $_POST["description"])){
+            if($topicReference->createTopic($userReference->getUserId($_SESSION['username']), $_POST["title"], $_POST["description"])){
                 header("Location: vote.php");
             };
         }

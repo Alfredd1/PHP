@@ -1,15 +1,15 @@
-<?php
-return [
-    'app' => [
-        'host' => 'localhost',
-        'username' => 'username',
-        'password' => 'password',
-        'dbname' => 'dbname'
-    ],
-    'test' => [
-        'host' => 'localhost:3307',
-        'username' => 'root',
-        'password' => '',
-        'dbname' => 'tables'
-    ],
-];
+<?php
+return [
+    'app' => [
+        'host' => 'localhost',
+        'username' => 's5571963_AlfredNavarro',
+        'password' => '1234alfred',
+        'dbname' => 's5571963_tables'
+    ],
+    'test' => [
+        'host' => 'localhost',
+        'username' => 's5571963_AlfredNavarro',
+        'password' => '1234alfred',
+        'dbname' => 's5571963_tables'
+    ],
+];

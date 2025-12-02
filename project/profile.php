@@ -1,5 +1,13 @@
 <?php
     include 'nav.php';
+    require_once "classes.php";
+    $pdo = new PDO(
+        "mysql:host=localhost;dbname=s5571963_tables;charset=utf8",
+        "s5571963_AlfredNavarro", "1234alfred", [PDO::ATTR_ERRMODE => PDO:: ERRMODE_EXCEPTION]
+        );
+    $userReference = new User($pdo);
+    $topicReference = new Topic($pdo);
+    $voteReference = new Vote($pdo);
 
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -17,11 +25,11 @@
         }
     }
 
-    $votes = getUserVotingHistory($_SESSION['username']);
-    $topics = getTopics();
+    $votes = $voteReference->getUserVoteHistory($userReference->getUserId($_SESSION['username']));
+    $topics = $topicReference->getTopics();
 
-    $totalTopicsCreated = getTotalTopicsCreated($_SESSION['username']);
-    $totalVotesCast = getTotalVotesCast($_SESSION['username']);
+    $totalTopicsCreated = $topicReference->getTotalTopicsCreated($userReference->getUserId($_SESSION['username']));
+    $totalVotesCast = $voteReference->getTotalVotesCast($userReference->getUserId($_SESSION['username']));
 
 ?>
 <!DOCTYPE html>
@@ -57,11 +65,11 @@
                 <?php foreach($votes as $vote): ?>
                     <?php foreach($topics as $topic): ?>
 
-                    <?php if ($topic['topicID'] === $vote[0]): ?>
-                        <div class="topic-vote" style=" background-color: <?= $vote[2] === 'up' ? '#4dab64' : '#e3495e' ?>" >
-                            <p class="vote-content"><?=  $topic['title'] ?></p>
+                    <?php if ($topic->id === $vote->topicId): ?>
+                        <div class="topic-vote" style=" background-color: <?= $vote->voteType === 'up' ? '#4dab64' : '#e3495e' ?>" >
+                            <p class="vote-content"><?=  $topic->title ?></p>
 
-                            <p class="vote-content"> voted <?=  $vote[2]?></p>
+                            <p class="vote-content"> voted <?=  $vote->voteType?></p>
                         </div>
                     <?php endif ?>
 

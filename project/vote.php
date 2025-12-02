@@ -4,8 +4,17 @@
         session_start();
     }
     include "functions.php";
+    require_once "classes.php";
+    $pdo = new PDO(
+        "mysql:host=localhost;dbname=s5571963_tables;charset=utf8",
+        "s5571963_AlfredNavarro", "1234alfred", [PDO::ATTR_ERRMODE => PDO:: ERRMODE_EXCEPTION]
+        );
+    $userReference = new User($pdo);
+    $topicReference = new Topic($pdo);
+    $voteReference = new Vote($pdo);
 
-    $topicList = getTopics();
+    $topicList = $topicReference->getTopics();
+    $voteList = $voteReference->getVotes();
     $voted = false;
     $theme = $_COOKIE['theme'] ?? 'light';
 
@@ -16,8 +25,8 @@
         $topicID = $_POST['topicID'];
         $voteType = $_POST['voteType'] ?? null;
 
-        if ($voteType && !hasVoted($_SESSION['username'], $topicID)) {
-            vote($_SESSION['username'], $topicID, $voteType);
+        if ($voteType && !$voteReference->hasVoted($topicID, $userReference->getUserId($_SESSION['username']))) {
+            $voteReference->vote($userReference->getUserId($_SESSION['username']), $topicID, $voteType);
         } else if ($voteType) {
             $voted = true;
         }
@@ -33,33 +42,33 @@
 <body>
     <main>
         <div id="warning" >
-            You Already Voted for on this topic.
+            You Already Voted on this topic.
         </div>
         <h2 id="pageTitle">Topic List</h2>
         <div id="grid-wrapper">
             <?php foreach ($topicList as $topic): ?>
 
             <?php
-                $upVotes = getVoteResults($topic['topicID'])["up"];
-                $downVotes = getVoteResults($topic['topicID'])["down"];
+                $upVotes = $voteReference->getTotalUpVotes($topic->id);
+                $downVotes = $voteReference->getTotalDownVotes($topic->id);
                 $userVote = null;
-                $votes = getUserVotingHistory($_SESSION['username']);
+                $votes = $voteReference->getUserVoteHistory($userReference->getUserId($_SESSION['username']));
                 foreach ($votes as $vote) {
-                    if ($vote[0] == $topic['topicID']) {
-                        $userVote = $vote[2] === "up"; // "up" or "down"
+                    if ($vote->topicId == $topic->id) {
+                        $userVote = $vote->voteType === "up"; // "up" or "down"
                         break;
                     }
                 }
             ?>
             <div class="eventBox">
-                <h2 class="topicTitle"><?= $topic['title'] ?></h2>
-                <p>Created By: <?= $topic['creator'] ?></p>
-                <p>ID: <?= $topic['topicID'] ?></p>
+                <h2 class="topicTitle"><?= $topic->title ?></h2>
+                <p>Created By: <?= $userReference->getUsername($topic->userId) ?></p>
+                <p>ID: <?= $topic->id ?></p>
                 <br>
-                <p>Description: <?= $topic['description'] ?></p>
+                <p>Description: <?= $topic->description ?></p>
 
                 <form method="POST">
-                    <input type="hidden" name="topicID" value="<?= $topic['topicID'] ?>">
+                    <input type="hidden" name="topicID" value="<?= $topic->id ?>">
 
                     <button
                             type="submit"
@@ -81,8 +90,6 @@
                         Downvote
                     </button>
 
-
-                    <input id="commentBox" type="text" placeholder="Thoughts, Opinions, Comments?">
                 </form>
             </div>
 
@@ -167,12 +174,6 @@
         justify-content: center; /* Center the whole grid */
     }
 
-    #commentBox{
-        margin-top: 5px;
-        width: 307px;
-        border-radius: 10px;
-        height: 40px;
-    }
     #warning{
         display: none;
         background-color: red;
@@ -181,10 +182,6 @@
         height: 50px;
         text-align: center;
 
-    }
-
-    form{
-        margin-bottom: 0px;
     }
 </style>
 

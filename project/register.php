@@ -1,12 +1,20 @@
 <?php
+    require_once "classes.php";
+    $pdo = new PDO(
+        "mysql:host=localhost;dbname=s5571963_tables;charset=utf8",
+        "s5571963_AlfredNavarro", "1234alfred", [PDO::ATTR_ERRMODE => PDO:: ERRMODE_EXCEPTION]
+        );
+    $userReference = new User($pdo);
     $registered = false;
-    include("functions.php");
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if(isset($_POST['username']) && isset($_POST['password'])) {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            if (registerUser($username, $password)) {
+        if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
+            $email = trim($_POST['email']);
+            if ($userReference->registerUser($username, $email, $password)) {
                 header('Location: login.php');
+                exit;
             } else {
                 $registered = true;
             }
@@ -47,7 +55,7 @@
         p{
             color: black;
         }
-        #username, #password{
+        #username, #password, #email{
             margin-bottom: 20px;
             font-size: 25px;
             border-radius: 10px;
@@ -75,6 +83,10 @@
             <br>
             <input type="text" id="username" name="username"">
             <br>
+            <label for="email">Email</label>
+            <br>
+            <input type="email" id="email" name="email"">
+            <br>
             <label for="password">Password</label>
             <br>
             <input type="password" id="password" name="password"">
@@ -87,8 +99,9 @@
         function formChecker(){
             let username = document.forms["registration"]["username"].value.trim();
             let password = document.forms["registration"]["password"].value;
+            let email = document.forms["registration"]["email"].trim();
 
-            if(username === "" || password === ""){
+            if(username === "" || password === "" || email === ""){
                 alert("Please fill out the log in fields");
                 return false;
             }
